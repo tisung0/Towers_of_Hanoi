@@ -1,18 +1,20 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef myStack_H
+#define myStack_H
+
 #include <iostream>
 #include "disk.h"
+
 using namespace std;
 
-enum STACK_ERR {FULL, EMPTY};
+enum myStack_ERR {FULL, EMPTY};
 
-class stack{
+class myStack{
 public:
-    stack();
-    ~stack();
+    myStack();
+    ~myStack();
 
     void setDisks(int);
-    void inStack(int);
+    void inmyStack(int);
     void push(disk*);
     disk *pop();
     disk *peek();
@@ -23,7 +25,7 @@ public:
     int sizeOf();
     int quant();
 
-    friend ostream& operator<<(ostream& out, const stack& other);
+    friend ostream& operator<<(ostream& out, const myStack& other);
 
 private:
     disk *top;
@@ -32,4 +34,4 @@ private:
     void nukem();
 };
 
-#endif // STACK_H
+#endif // myStack_H

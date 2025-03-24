@@ -1,18 +1,19 @@
-#include "board.h"
 #include <iostream>
 #include <math.h>
+
+#include "board.h"
 
 using namespace std;
 
 board::board(){
-    rods = new stack[num];
+    rods = new myStack[num];
     start = end = NULL;
     num_of_disks = 0;
 }
 
 board::~board(){
     for(int i = 0;  i < num; ++i)
-        rods[i] = stack();
+        rods[i] = myStack();
     delete[] rods;
     start = end = NULL;
 }
@@ -21,14 +22,14 @@ bool board::complete(){
     return(rods[0].empty() && rods[2].full());
 }
 
-bool board::legal(stack& a, stack& b){
+bool board::legal(myStack& a, myStack& b){
     if(a.peek() == NULL)
         return false;
     return((b.peek() == NULL)|| (a.peek()->getSize() < b.peek()->getSize()));
 }
 
 void board::load(int s){
-    rods[0].inStack(s);
+    rods[0].inmyStack(s);
     num_of_disks = s;
     for(int i = 0; i < num; ++i)
         rods[i].setDisks(num_of_disks);
@@ -50,7 +51,7 @@ void board::moveRight(int s){
     rods[s].push(temp);
 }
 
-void board::generalMove(stack& s1, stack& s2){
+void board::generalMove(myStack& s1, myStack& s2){
     disk *temp = new disk;
 //    if(s1.peek() == NULL)
 //        s1.top = new disk;
@@ -110,13 +111,13 @@ void board::play(){
     if(ans != 'y')
         exit(1);
         while(c1 < 0 || c1 > 2){
-            cout << "Enter stack number you wish to move FROM: ";
+            cout << "Enter myStack number you wish to move FROM: ";
             cin >> c1;
             if(c1 < 0 || c1 > 2)
                 cout << "OUT OF RANGE: select again\n";
         }
         while(c2 < 0 || c2 > 2){
-            cout << "Select stack number you wish to move TO: ";
+            cout << "Select myStack number you wish to move TO: ";
             cin >> c2;
             if(c2 < 0 || c2 > 2)
                 cout << "OUT OF RANGE: select again\n";
@@ -129,9 +130,9 @@ void board::play(){
 
 ostream& operator<<(ostream& out, const board& b){
     if(&out == &cout){
-        out <<  " \n ///////////////////// STACKS_BOARD ///////////////////// \n";
+        out <<  " \n ///////////////////// myStackS_BOARD ///////////////////// \n";
         for(int i = 0; i < b.num; ++i)
-            out << "STACK NUMBER: " << i << "::" <<  b.rods[i] << endl;
+            out << "myStack NUMBER: " << i << "::" <<  b.rods[i] << endl;
     }
     out << endl;
     return out;

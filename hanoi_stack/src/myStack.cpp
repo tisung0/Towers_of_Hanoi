@@ -1,25 +1,26 @@
 #include <iostream>
-#include "stack.h"
+
+#include "myStack.h"
 
 using namespace std;
 
 
-stack::stack(){
+myStack::myStack(){
     top = NULL;
     currSize = 0;
     tot_disks = 0;
     cap = 1 << 29;
 }
 
-stack::~stack(){
+myStack::~myStack(){
     nukem();
 }
 
-void stack::setDisks(int s){
+void myStack::setDisks(int s){
     tot_disks = s;
 }
 
-void stack::inStack(int s){
+void myStack::inmyStack(int s){
     disk* putIn = NULL;
     currSize = 0;
     tot_disks = s;
@@ -30,7 +31,7 @@ void stack::inStack(int s){
     }
 }
 
-void stack::push(disk *d){
+void myStack::push(disk *d){
 //    if(full())
 //        throw FULL;
     disk* temp = new disk;
@@ -44,7 +45,7 @@ void stack::push(disk *d){
     ++currSize;
 }
 
-disk* stack::pop(){
+disk* myStack::pop(){
     if(empty())
         throw EMPTY;
     disk *temp = new disk(*top);
@@ -53,28 +54,28 @@ disk* stack::pop(){
     return temp;
 }
 
-disk* stack::peek(){
+disk* myStack::peek(){
     return top;
 }
 
-bool stack::empty(){
+bool myStack::empty(){
     return top == NULL;
 }
 
-bool stack::full(){
+bool myStack::full(){
     return currSize == tot_disks;
 }
 
-int stack::sizeOf(){
+int myStack::sizeOf(){
     return currSize;
 }
 
-ostream& operator<<(ostream &out, const stack& s){
+ostream& operator<<(ostream &out, const myStack& s){
     if(&out == &cout){
         out << "Size: " << s.currSize << endl
             << "Number of Disks: " << s.tot_disks << endl
-            << "Stack capacity: " << s.tot_disks << endl
-            << "Stack Contents: \n";
+            << "myStack capacity: " << s.tot_disks << endl
+            << "myStack Contents: \n";
         int i = 0;
         for(disk* temp = s.top; temp != NULL; temp = temp->getNext()){
             out << "index " << i << " : data " << temp->getSize() << endl;
@@ -87,7 +88,7 @@ ostream& operator<<(ostream &out, const stack& s){
     return out;
 }
 
-void stack::nukem(){
+void myStack::nukem(){
     currSize = 0;
     top = NULL;
     while(!empty())

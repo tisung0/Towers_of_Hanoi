@@ -1,6 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
-#include "stack.h"
+#include "myStack.h"
 
 enum BOARD_ERR{OUTSIDE_RANGE};
 
@@ -9,13 +9,13 @@ public:
     board();
     ~board();
 
-    bool legal(stack&, stack&);
+    bool legal(myStack&, myStack&);
     bool complete();
 
     void moveLeft(int);
     void moveRight(int);
     void load(int);
-    void generalMove(stack&, stack&);
+    void generalMove(myStack&, myStack&);
     void play();
 
     void autoSolve();
@@ -23,7 +23,7 @@ public:
     friend ostream& operator << (ostream& out, const board& b);
 
 private:
-    stack *rods, *start, *end;
+    myStack *rods, *start, *end;
     static const int num = 3;
     int num_of_disks;
 };

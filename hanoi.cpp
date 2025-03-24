@@ -1,6 +1,6 @@
 #include <iostream>
 #include <time.h>
-#include "board.h"
+#include "hanoi_stack/include/board.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ int main(){
 }
 
 void ins(int& x){
-    cout << "TOWER OF HANOI __ STACK IMPLEMENTED\n\n";
+    cout << "TOWER OF HANOI __ myStack IMPLEMENTED\n\n";
     cout << "Please enter the number of disks you would like: ";
     cin >> x;
 }
