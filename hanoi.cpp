@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
-#include "hanoi_stack/include/board.h"
+
+#include "include/Board.h"
 
 using namespace std;
 
@@ -8,7 +9,7 @@ void ins(int& x);
 
 int main(){
     clock_t t = clock();
-    board b1;
+    Board b1;
     int x = 0;
     ins(x);
     b1.load(x);

@@ -4,10 +4,10 @@
 
 enum BOARD_ERR{OUTSIDE_RANGE};
 
-class board{
+class Board{
 public:
-    board();
-    ~board();
+    Board();
+    ~Board();
 
     bool legal(myStack&, myStack&);
     bool complete();
@@ -20,7 +20,7 @@ public:
 
     void autoSolve();
 
-    friend ostream& operator << (ostream& out, const board& b);
+    friend ostream& operator << (ostream& out, const Board& b);
 
 private:
     myStack *rods, *start, *end;

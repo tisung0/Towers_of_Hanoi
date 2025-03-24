@@ -3,7 +3,7 @@
 add_library(hanoi_stack STATIC
     src/disk.cpp
     src/myStack.cpp
-    src/board.cpp
+    src/Board.cpp
 )
 
 target_include_directories(hanoi_stack PUBLIC

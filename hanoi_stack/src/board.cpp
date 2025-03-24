@@ -1,49 +1,50 @@
 #include <iostream>
 #include <math.h>
 
-#include "board.h"
+#include "Board.h"
 
 using namespace std;
 
-board::board(){
+Board::Board(){
     rods = new myStack[num];
     start = end = NULL;
     num_of_disks = 0;
 }
 
-board::~board(){
-    for(int i = 0;  i < num; ++i)
+Board::~Board(){
+    for(int i = 0;  i < num; ++i){
         rods[i] = myStack();
+    }
     delete[] rods;
     start = end = NULL;
 }
 
-bool board::complete(){
+bool Board::complete(){
     return(rods[0].empty() && rods[2].full());
 }
 
-bool board::legal(myStack& a, myStack& b){
+bool Board::legal(myStack& a, myStack& b){
     if(a.peek() == NULL)
         return false;
     return((b.peek() == NULL)|| (a.peek()->getSize() < b.peek()->getSize()));
 }
 
-void board::load(int s){
+void Board::load(int s){
     rods[0].inmyStack(s);
     num_of_disks = s;
     for(int i = 0; i < num; ++i)
         rods[i].setDisks(num_of_disks);
 }
 
-void board::moveLeft(int s){
+void Board::moveLeft(int s){
     disk *temp = new disk(*rods[s].pop());
-    --s;
+    s-=1;
     if(s < 0)
         s = 2;
     rods[s].push(temp);
 }
 
-void board::moveRight(int s){
+void Board::moveRight(int s){
     disk *temp = rods[s].pop();
     ++s;
     if(s > 2)
@@ -51,11 +52,9 @@ void board::moveRight(int s){
     rods[s].push(temp);
 }
 
-void board::generalMove(myStack& s1, myStack& s2){
+void Board::generalMove(myStack& s1, myStack& s2){
     disk *temp = new disk;
-//    if(s1.peek() == NULL)
-//        s1.top = new disk;
-    if(legal(s1,s2)){
+    if(legal(s1, s2)){
 //        cout << "THIS IS LEGAL\n";
         temp = s1.pop();
         s2.push(temp);
@@ -67,7 +66,7 @@ void board::generalMove(myStack& s1, myStack& s2){
     }
 }
 
-void board::autoSolve(){
+void Board::autoSolve(){
     int moves = pow(2,num_of_disks) - 1 ;
     cout << "This should take "<< moves << " moves.\n";
     if(num_of_disks % 2 == 1){
@@ -97,7 +96,7 @@ void board::autoSolve(){
         }
 }
 
-void board::play(){
+void Board::play(){
     cout << "NOW PLAYING:\n";
     int c1 = -1, c2 = -1;
     char ans;
@@ -128,9 +127,9 @@ void board::play(){
 
 }
 
-ostream& operator<<(ostream& out, const board& b){
+ostream& operator<<(ostream& out, const Board& b){
     if(&out == &cout){
-        out <<  " \n ///////////////////// myStackS_BOARD ///////////////////// \n";
+        out <<  " \n ///////////////////// myStackS_Board ///////////////////// \n";
         for(int i = 0; i < b.num; ++i)
             out << "myStack NUMBER: " << i << "::" <<  b.rods[i] << endl;
     }
